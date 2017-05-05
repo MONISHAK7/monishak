@@ -1,0 +1,92 @@
+package javawithsparql;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Iterator;
+import org.apache.jena.query.Query;
+import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
+	
+
+public class javaWithDBPEDIA {
+
+     public void dpEndpoint(String query,String dbpediLink)
+    {
+         // Create a Query with the given Strinqueryg
+        Query NewQuery = QueryFactory.create(query);
+
+        // Create the Execution Factory using the given Endpoint
+        QueryExecution queryExecution = QueryExecutionFactory.sparqlService(
+                dbpediLink, NewQuery);
+
+        // Set Timeout
+        ((QueryEngineHTTP)queryExecution).addParam("timeout", "3000");
+
+
+        // Execute Query
+        int iCount = 0;
+        ResultSet resultSet = queryExecution.execSelect();
+        while (resultSet.hasNext()) {
+            // Get Result
+            QuerySolution querySln = resultSet.next();
+
+            // Get Variable Names
+            Iterator<String> itVars = querySln.varNames();
+
+            // Count
+            iCount++;
+            System.out.println("Result " + iCount + ": ");
+
+            // Display Result
+            while (itVars.hasNext()) {
+                String szVar = itVars.next().toString();
+                String szVal = querySln.get(szVar).toString();
+                
+                System.out.println("[" + szVar + "]: " + szVal);
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+         // SPARQL Query
+                 
+         String query = "prefix dbpo: <http://dbpedia.org/ontology/> " + 
+                 "prefix dbpr: <http://dbpedia.org/resource/>" + 
+                 "select distinct ?Predicate ?Object where {\n" +
+                 "  ?Subject ?Predicate ?Object  \n" +
+                 "  filter(?Subject = dbpr:Markiplier)\n" +
+                 "} LIMIT 5";
+        // Arguments
+        if (args != null && args.length == 1) {
+            query = new String(
+                    Files.readAllBytes(Paths.get(args[0])),
+                    Charset.defaultCharset());
+        }
+
+        // DBPedia Endpoint
+       
+      String dbpediLink = "http://dbpedia.org/sparql";
+
+        // Query DBPedia
+        try {
+            javaWithDBPEDIA javaWithDbpedia = new javaWithDBPEDIA();
+            javaWithDbpedia.dpEndpoint(query, dbpediLink);
+        }
+        catch (Exception ex) {
+            System.err.println(ex);
+        }
+    
+    }
+    
+}
+
+
+
+
+
