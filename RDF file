@@ -1,0 +1,40 @@
+<rdf:RDF
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xmlns:admin="http://webns.net/mvcb/">
+<foaf:PersonalProfileDocument rdf:about="">
+  <foaf:maker rdf:resource="#me"/>
+  <foaf:primaryTopic rdf:resource="#me"/>
+  <admin:generatorAgent rdf:resource="http://www.ldodds.com/foaf/foaf-a-matic"/>
+  <admin:errorReportsTo rdf:resource="mailto:leigh@ldodds.com"/>
+</foaf:PersonalProfileDocument>
+<foaf:Person rdf:ID="me">
+<foaf:name>MONISHA KESAVAN</foaf:name>
+<foaf:title>Dr</foaf:title>
+<foaf:givenname>MONISHA</foaf:givenname>
+<foaf:family_name>KESAVAN</foaf:family_name>
+<foaf:nick>monu</foaf:nick>
+<foaf:mbox_sha1sum>301443475c613149b19abbe5350d09375323b329</foaf:mbox_sha1sum>
+<foaf:homepage rdf:resource="University"/>
+<foaf:depiction rdf:resource="nature"/>
+<foaf:phone rdf:resource="tel:9876543210"/>
+<foaf:workplaceHomepage rdf:resource="intel"/>
+<foaf:workInfoHomepage rdf:resource="development"/>
+<foaf:schoolHomepage rdf:resource="sunbeam"/>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>charlie</foaf:name>
+<foaf:mbox_sha1sum>7ed36a32ebf89d8549c0d87f8df7d133c7274334</foaf:mbox_sha1sum>
+<rdfs:seeAlso rdf:resource="anju"/></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>goony</foaf:name>
+<foaf:mbox_sha1sum>d78ead54c26598c1598f82eabb792aceb8c0ca14</foaf:mbox_sha1sum>
+<rdfs:seeAlso rdf:resource="charlie"/></foaf:Person></foaf:knows>
+<foaf:knows>
+<foaf:Person>
+<foaf:name>anju</foaf:name>
+<foaf:mbox_sha1sum>d8aa7a7def487f060dd903d01e48f0c0cd29c81e</foaf:mbox_sha1sum>
+<rdfs:seeAlso rdf:resource="goony"/></foaf:Person></foaf:knows></foaf:Person>
+</rdf:RDF>
